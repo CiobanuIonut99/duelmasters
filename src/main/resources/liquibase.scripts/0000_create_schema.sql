@@ -1,0 +1,2 @@
+--changeset CREATE_SCHEMA
+CREATE SCHEMA IF NOT EXISTS duel_masters;
