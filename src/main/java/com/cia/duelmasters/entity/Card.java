@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "card", schema = "duel_masters")
 public class Card {
