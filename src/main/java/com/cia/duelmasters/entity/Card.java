@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Getter
@@ -19,19 +20,29 @@ public class Card {
 
     @Column
     private String cardName;
+
     @Column
     private String cardType;
+
     @Column
     private String civilization;
+
     @Column
     private String race;
+
     @Column
     private int manaCost;
+
     @Column
     private int manaNumber;
+
     @Column
     private int power;
+
     @Column
     private String abilityText;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 }
