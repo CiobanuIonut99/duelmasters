@@ -9,6 +9,7 @@
     <include file="../liquibase.scripts/0000_create_schema.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0001_create_table_card.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0002_insert_into_table_card.sql" relativeToChangelogFile="true"/>
+    <include file="../liquibase.scripts/0003_create_table_player.sql" relativeToChangelogFile="true"/>
 
 
 
