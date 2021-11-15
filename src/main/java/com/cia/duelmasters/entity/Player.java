@@ -1,9 +1,5 @@
 package com.cia.duelmasters.entity;
 
-
-import liquibase.pro.packaged.C;
-import liquibase.pro.packaged.F;
-import liquibase.pro.packaged.S;
 import lombok.Getter;
 import lombok.Setter;
 

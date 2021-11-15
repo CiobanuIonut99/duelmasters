@@ -12,11 +12,6 @@ import java.util.List;
 @Setter
 @Builder
 public class BattleZoneDTO {
-
     private Long id;
     private List<Player> playerId;
-
-
-
-
 }
