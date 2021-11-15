@@ -2,6 +2,7 @@ package com.cia.duelmasters.entity;
 
 
 import liquibase.pro.packaged.C;
+import liquibase.pro.packaged.F;
 import liquibase.pro.packaged.S;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,19 +25,22 @@ public class Player {
     private String username;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> deck;
+    private List<Card> cardIdDeck;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> shieldZone;
+    private List<Card> cardIdShieldZone;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> drag5Cards;
+    private List<Card> cardIdCardsInHand;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> manaZone;
+    private List<Card> cardIdManaZone;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> graveYard;
+    private List<Card> cardIdGraveYard;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id")
+    private BattleZone battleZone;
 
 }

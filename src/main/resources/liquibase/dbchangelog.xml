@@ -10,6 +10,7 @@
     <include file="../liquibase.scripts/0001_create_table_card.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0002_insert_into_table_card.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0003_create_table_player.sql" relativeToChangelogFile="true"/>
+    <include file="../liquibase.scripts/0004_create_table_battlezone.sql" relativeToChangelogFile="true"/>
 
 
 
