@@ -1,6 +1,6 @@
 --changeset CREATE_TABLE_CARD
 
-DROP TABLE IF EXISTS duel_masters.card;
+DROP TABLE IF EXISTS duel_masters.card cascade;
 CREATE TABLE IF NOT EXISTS duel_masters.card(
 
     ID SERIAL unique,
