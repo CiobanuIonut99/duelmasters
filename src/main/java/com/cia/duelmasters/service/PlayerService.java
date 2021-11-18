@@ -1,8 +1,13 @@
 package com.cia.duelmasters.service;
 
 import com.cia.duelmasters.DTO.CardDTO;
+import com.cia.duelmasters.DTO.PlayerDTO;
+import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -46,6 +51,22 @@ public class PlayerService {
         System.out.println(deck.size());
         deck.forEach(System.out::println);
         return deck;
+    }
+
+    public ResponseEntity<HttpStatus> saveNewPlayer(PlayerDTO playerDTO){
+        playerRepository.save(mapDTOToEntity(playerDTO));
+            return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+
+    private Player mapDTOToEntity(PlayerDTO playerDTO){
+
+        return Player
+                .builder()
+                .username(playerDTO.getUsername())
+                .email(playerDTO.getEmail())
+                .password(playerDTO.getPassword())
+                .build();
+
     }
 
 }

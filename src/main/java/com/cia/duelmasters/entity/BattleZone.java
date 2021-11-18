@@ -19,6 +19,6 @@ public class BattleZone {
     private long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="battleZone")
-    private List<Player> playerId;
+    private List<Player> player;
 
 }
