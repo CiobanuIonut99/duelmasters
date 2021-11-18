@@ -2,15 +2,18 @@ package com.cia.duelmasters.service;
 
 import com.cia.duelmasters.DTO.CardDTO;
 import com.cia.duelmasters.DTO.PlayerDTO;
+import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class PlayerService {
@@ -46,27 +49,36 @@ public class PlayerService {
                 deck.add(allCards.get(randomNr));
                 longIntegerMap.put(allCards.get(randomNr), 1);
             }
-
         }
-        System.out.println(deck.size());
-        deck.forEach(System.out::println);
         return deck;
     }
 
-    public ResponseEntity<HttpStatus> saveNewPlayer(PlayerDTO playerDTO){
+    public ResponseEntity<HttpStatus> saveNewPlayer(PlayerDTO playerDTO) {
         playerRepository.save(mapDTOToEntity(playerDTO));
-            return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
-    private Player mapDTOToEntity(PlayerDTO playerDTO){
-
+    private Player mapDTOToEntity(PlayerDTO playerDTO) {
         return Player
                 .builder()
                 .username(playerDTO.getUsername())
                 .email(playerDTO.getEmail())
                 .password(playerDTO.getPassword())
                 .build();
-
     }
 
+    public Player getPlayerByUsername(String username) {
+        return playerRepository.getPlayerByUsername(username);
+    }
+
+    public Player randomDeckForPlayer(PlayerDTO playerDTO) {
+        List<CardDTO> deckDTO = generateRandomDeck();
+        List<Card> deckEntity = deckDTO.stream()
+                .map(cardDto -> cardService.mapToEntity(cardDto))
+                .collect(toList());
+        Player player = mapDTOToEntity(playerDTO);
+        player.setDeck(deckEntity);
+        deckEntity.forEach(System.out::println);
+        return playerRepository.save(player);
+    }
 }

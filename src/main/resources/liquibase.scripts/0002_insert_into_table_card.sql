@@ -4,7 +4,7 @@ VALUES
 ('Hanusa, Radiance Elemental','CREATURE','LIGHT','ANGEL_COMMAND',7,1,9500,'DOUBLE_BREAKER',null),
 ('Urth, Purifying Elemental','CREATURE','LIGHT','ANGEL_COMMAND',8,1,6000,'DOUBLE_BREAKER','At the end of each of your turns, you may untap this creature'),
 ('Aqua Sniper','CREATURE','WATER','LIQUID_PEOPLE',8,1,5000,null,' When you put this creature into the battle zone,choose up to 2 creatures in the battle zone and return them to their owners hands'),
-('king Depthcon','CREATURE','WATER','LEVIATHAN',7,1,6000,'DOUBLE_BREAKER','This creature cant be blocked'),
+('King Depthcon','CREATURE','WATER','LEVIATHAN',7,1,6000,'DOUBLE_BREAKER','This creature cant be blocked'),
 ('Deathliger, Lion of Chaos','CREATURE','DARK','DEMON_COMMAND',7,1,9000,'DOUBLE_BREAKER',null),
 ('Zagaan, Knight of Darkness','CREATURE','DARK','DEMON_COMMAND',6,1,7000,'DOUBLE_BREAKER',null),
 ('Scarlet Skyterror','CREATURE','FIRE','ARMORED_WYVERN',8,1,3000,null,'When you put this creature into the battle zone, destroys all creature that have "blocker"'),

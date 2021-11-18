@@ -3,14 +3,17 @@ package com.cia.duelmasters.entity;
 import com.cia.duelmasters.enums.Civilization;
 import com.cia.duelmasters.enums.Race;
 import com.cia.duelmasters.enums.SpecialAbility;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "card", schema = "duel_masters")
 public class Card {
 

@@ -19,7 +19,7 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
-    private CardDTO mapEntityToDTO(Card card) {
+    public CardDTO mapEntityToDTO(Card card) {
         return CardDTO
                 .builder()
                 .id(card.getId())
@@ -30,6 +30,20 @@ public class CardService {
                 .manaNumber(card.getManaNumber())
                 .power(card.getPower())
                 .abilityText(card.getAbilityText())
+                .build();
+    }
+
+    public Card mapToEntity(CardDTO cardDTO) {
+        return Card
+                .builder()
+                .id(cardDTO.getId())
+                .cardName(cardDTO.getCardName())
+                .cardType(cardDTO.getCardType())
+                .civilization(cardDTO.getCivilization())
+                .manaCost(cardDTO.getManaCost())
+                .manaNumber(cardDTO.getManaNumber())
+                .power(cardDTO.getPower())
+                .abilityText(cardDTO.getAbilityText())
                 .build();
     }
 
