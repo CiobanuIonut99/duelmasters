@@ -41,5 +41,5 @@ VALUES
 ('Candy Drop','CREATURE','WATER','CYBER_VIRUS',3,1,1000,null,'This creature cant be blocked'),
 ('Candy Crystal Memory','SPELL','WATER',null,4,1,0,'SHIELD_TRIGGER','Search your deck, you may take a card from your deck and put it in your hand, then shuffle your deck'),
 ('Faerie Child','CREATURE','WATER','CYBER_VIRUS',4,1,2000,null,'This creature cant be blocked'),
-('Hunter Fish','CREATURE','WATER','FISH',2,1,3000,'BLOCKER','This creature cant attack'),
+('Hunter Fish','CREATURE','WATER','FISH',2,1,3000,'BLOCKER','This creature cant attack')
 
