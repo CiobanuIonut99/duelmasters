@@ -21,22 +21,10 @@ public class Player {
     private String username;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> cardIdDeck;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> cardIdShieldZone;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> cardIdCardsInHand;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> cardIdManaZone;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<Card> cardIdGraveYard;
+    private List<Card> deck;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "card_id")
+    @JoinColumn(name = "battlezone_id")
     private BattleZone battleZone;
 
 }

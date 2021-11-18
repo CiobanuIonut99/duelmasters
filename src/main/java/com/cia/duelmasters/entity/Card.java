@@ -29,18 +29,18 @@ public class Card {
     private String race;
 
     @Column
-    private int manaCost;
+    private Integer manaCost;
 
     @Column
-    private int manaNumber;
+    private Integer manaNumber;
 
     @Column
-    private int power;
+    private Integer power;
 
     @Column
     private String abilityText;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "PLAYER_ID")
     private Player player;
 }

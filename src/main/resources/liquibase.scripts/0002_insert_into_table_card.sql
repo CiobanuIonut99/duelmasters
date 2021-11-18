@@ -1,6 +1,6 @@
 --changeset INSERT_INTO_TABLE_CARD
 
-INSERT INTO duel_masters.card(CARDNAME, CARDTYPE, CIVILIZATION, RACE, MANACOST, MANANUMBER, POWER, ABILITYTEXT)
+INSERT INTO duel_masters.card(CARD_NAME, CARD_TYPE, CIVILIZATION, RACE, MANA_COST, MANA_NUMBER, POWER, ABILITY_TEXT)
 VALUES ('Bolshack Dragon', 'Creature', 'Fire', 'Armored Dragon', 6, 1, 6000,
         'While attacking this creature gets +1000 power for each fire card in your graveyard.'),
        ('Aqua Hulcus','Creature','Water','Liquid People',3,1,2000,

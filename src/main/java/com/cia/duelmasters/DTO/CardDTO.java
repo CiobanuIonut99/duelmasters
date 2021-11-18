@@ -1,25 +1,22 @@
 package com.cia.duelmasters.DTO;
 
 import com.cia.duelmasters.entity.Player;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class CardDTO {
-
     private Long id;
     private String cardName;
     private String cardType;
     private String civilization;
     private String race;
-    private int manaCost;
-    private int manaNumber;
-    private int power;
+    private Integer manaCost;
+    private Integer manaNumber;
+    private Integer power;
     private String abilityText;
     private Player player;
 }

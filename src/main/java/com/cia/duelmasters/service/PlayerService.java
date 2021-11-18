@@ -28,7 +28,7 @@ public class PlayerService {
         List<CardDTO> deck = new ArrayList<>();
 
         for (int i = 0; i < 40; i++) {
-            deck.add(allCards.get(random.nextInt()));
+            deck.add(allCards.get(random.nextInt(allCards.size())));
         }
         return deck;
     }

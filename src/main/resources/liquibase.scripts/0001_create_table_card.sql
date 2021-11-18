@@ -4,13 +4,14 @@ DROP TABLE IF EXISTS duel_masters.card cascade;
 CREATE TABLE IF NOT EXISTS duel_masters.card(
 
     ID SERIAL unique,
-    CARDNAME character varying (255),
-    CARDTYPE character varying (255),
+    CARD_NAME character varying (255),
+    CARD_TYPE character varying (255),
     CIVILIZATION char varying (255),
     RACE character varying (255),
-    MANACOST int,
-    MANANUMBER int,
+    MANA_COST int,
+    MANA_NUMBER int,
     POWER int,
-    ABILITYTEXT character varying (255)
+    ABILITY_TEXT character varying (255),
+    PLAYER_ID integer
 
-);
+    );
