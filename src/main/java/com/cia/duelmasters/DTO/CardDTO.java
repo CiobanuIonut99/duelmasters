@@ -5,11 +5,8 @@ import com.cia.duelmasters.enums.Civilization;
 import com.cia.duelmasters.enums.SpecialAbility;
 import lombok.*;
 
-@Getter
-@Setter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class CardDTO {
     private Long id;
     private String cardName;

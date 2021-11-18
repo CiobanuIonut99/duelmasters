@@ -22,26 +22,29 @@ public class PlayerService {
         List<CardDTO> allCards = cardService.getCardDTOList();
         List<CardDTO> deck = new ArrayList<>();
         Map<CardDTO, Integer> longIntegerMap = new HashMap<>();
-        Collections.shuffle(allCards);
         return getCardDTOS(allCards, deck, longIntegerMap);
     }
 
     private List<CardDTO> getCardDTOS(List<CardDTO> allCards, List<CardDTO> deck, Map<CardDTO, Integer> longIntegerMap) {
         int count;
-        for (int i = 0; i < allCards.size(); i++) {
-            if (longIntegerMap.get(allCards.get(i)) != null) {
-                count = longIntegerMap.get(allCards.get(i));
-                if ((longIntegerMap.get(allCards.get(i)) <= 4)) {
-                    deck.add(allCards.get(i));
+        Random random = new Random();
+        for (int i = 0; i < 40; i++) {
+            int randomNr = random.nextInt(allCards.size());
+            if (longIntegerMap.get(allCards.get(randomNr)) != null) {
+                count = longIntegerMap.get(allCards.get(randomNr));
+                if ((longIntegerMap.get(allCards.get(randomNr)) < 4)) {
+                    deck.add(allCards.get(randomNr));
                     count++;
-                    longIntegerMap.put(allCards.get(i), count);
+                    longIntegerMap.put(allCards.get(randomNr), count);
                 }
             } else {
-                deck.add(allCards.get(i));
-                longIntegerMap.put(allCards.get(i), 1);
+                deck.add(allCards.get(randomNr));
+                longIntegerMap.put(allCards.get(randomNr), 1);
             }
 
         }
+        System.out.println(deck.size());
+        deck.forEach(System.out::println);
         return deck;
     }
 
