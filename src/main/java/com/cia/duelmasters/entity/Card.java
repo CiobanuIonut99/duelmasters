@@ -1,5 +1,7 @@
 package com.cia.duelmasters.entity;
 
+import com.cia.duelmasters.enums.Civilization;
+import com.cia.duelmasters.enums.SpecialAbility;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +25,8 @@ public class Card {
     private String cardType;
 
     @Column
-    private String civilization;
+    @Enumerated(EnumType.STRING)
+    private Civilization civilization;
 
     @Column
     private Integer manaCost;
@@ -36,6 +39,10 @@ public class Card {
 
     @Column
     private String abilityText;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private SpecialAbility specialAbility;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PLAYER_ID")
