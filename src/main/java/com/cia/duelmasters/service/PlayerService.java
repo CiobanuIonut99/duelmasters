@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -27,8 +28,10 @@ public class PlayerService {
         List<CardDTO> allCards = cardService.getCardDTOList();
         List<CardDTO> deck = new ArrayList<>();
 
-        for (int i = 0; i < 40; i++) {
-            deck.add(allCards.get(random.nextInt(allCards.size())));
+        Collections.shuffle(allCards);
+
+        for (int i = 0; i < allCards.size(); i++) {
+            deck.add(allCards.get(i));
         }
         return deck;
     }
