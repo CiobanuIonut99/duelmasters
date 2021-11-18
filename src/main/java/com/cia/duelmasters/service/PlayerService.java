@@ -7,10 +7,7 @@ import com.cia.duelmasters.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class PlayerService {
@@ -26,16 +23,27 @@ public class PlayerService {
     public List<CardDTO> generateRandomDeck() {
         Random random = new Random();
         List<CardDTO> allCards = cardService.getCardDTOList();
-        List<CardDTO> allCards4Times = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            allCards4Times.addAll(allCards);
-        }
         List<CardDTO> deck = new ArrayList<>();
+        Map<CardDTO, Integer> longIntegerMap = new HashMap<>();
+        Collections.shuffle(allCards);
 
-        Collections.shuffle(allCards4Times);
+        deck.add(allCards.get(0));
+        longIntegerMap.put(allCards.get(0), 1);
+        int count;
 
-        for (int i = 0; i < 40; i++) {
-            deck.add(allCards4Times.get(i));
+        Collections.shuffle(allCards);
+        for (int i = 0; i < allCards.size(); i++) {
+            if(longIntegerMap.get(allCards.get(i)) != null){
+                count = longIntegerMap.get(allCards.get(i));
+                if ((longIntegerMap.get(allCards.get(i)) <= 4)) {
+                    deck.add(allCards.get(i));
+                    count++;
+                    longIntegerMap.put(allCards.get(i), count);
+                }
+            }else{
+                deck.add(allCards.get(i));
+            }
+
         }
         return deck;
     }
