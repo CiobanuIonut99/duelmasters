@@ -1,7 +1,6 @@
 package com.cia.duelmasters.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +9,9 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "player", schema = "duel_masters")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Player {
 
     @Id
@@ -20,11 +22,17 @@ public class Player {
     @Column
     private String username;
 
+    @Column
+    private String email;
+
+    @Column
+    private String password;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
     private List<Card> deck;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "battlezone_id")
+    @JoinColumn(name = "BATTLEZONE_ID")
     private BattleZone battleZone;
 
 }

@@ -1,12 +1,12 @@
 package com.cia.duelmasters.controller;
 
 import com.cia.duelmasters.DTO.CardDTO;
+import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +24,11 @@ public class PlayerController {
     @GetMapping("random-deck")
     public List<CardDTO> generateRandomDeck() {
         return playerService.generateRandomDeck();
+    }
+
+    @PostMapping
+    public ResponseEntity<HttpStatus> saveNewPlayer(@RequestBody PlayerDTO playerDTO) {
+        return playerService.saveNewPlayer(playerDTO);
     }
 
 }
