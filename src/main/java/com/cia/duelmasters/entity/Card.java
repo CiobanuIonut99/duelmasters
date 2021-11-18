@@ -7,14 +7,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
 @Entity
 @Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "card", schema = "duel_masters")
+@Data
 public class Card {
 
     @Id

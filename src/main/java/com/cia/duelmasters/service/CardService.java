@@ -30,6 +30,8 @@ public class CardService {
                 .manaNumber(card.getManaNumber())
                 .power(card.getPower())
                 .abilityText(card.getAbilityText())
+                .race(card.getRace())
+                .specialAbility(card.getSpecialAbility())
                 .build();
     }
 
@@ -44,6 +46,8 @@ public class CardService {
                 .manaNumber(cardDTO.getManaNumber())
                 .power(cardDTO.getPower())
                 .abilityText(cardDTO.getAbilityText())
+                .race(cardDTO.getRace())
+                .specialAbility(cardDTO.getSpecialAbility())
                 .build();
     }
 

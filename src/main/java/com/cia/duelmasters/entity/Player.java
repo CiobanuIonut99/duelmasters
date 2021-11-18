@@ -5,13 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "player", schema = "duel_masters")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Data
 public class Player {
 
@@ -29,7 +28,7 @@ public class Player {
     @Column
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player",cascade = CascadeType.PERSIST)
     private List<Card> deck;
 
     @ManyToOne(fetch = FetchType.LAZY)

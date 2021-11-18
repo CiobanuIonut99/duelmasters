@@ -33,8 +33,8 @@ public class PlayerController {
     }
 
     @PutMapping
-    public Player randomDeckForPlayer(@RequestBody PlayerDTO playerDTO) {
-        return playerService.randomDeckForPlayer(playerDTO);
+    public Player randomDeckForPlayer() {
+        return playerService.randomDeckForPlayer();
     }
 
 }
