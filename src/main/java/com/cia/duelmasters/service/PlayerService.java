@@ -26,12 +26,16 @@ public class PlayerService {
     public List<CardDTO> generateRandomDeck() {
         Random random = new Random();
         List<CardDTO> allCards = cardService.getCardDTOList();
+        List<CardDTO> allCards4Times = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            allCards4Times.addAll(allCards);
+        }
         List<CardDTO> deck = new ArrayList<>();
 
-        Collections.shuffle(allCards);
+        Collections.shuffle(allCards4Times);
 
-        for (int i = 0; i < allCards.size(); i++) {
-            deck.add(allCards.get(i));
+        for (int i = 0; i < 40; i++) {
+            deck.add(allCards4Times.get(i));
         }
         return deck;
     }
