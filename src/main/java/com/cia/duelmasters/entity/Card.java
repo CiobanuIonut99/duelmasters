@@ -1,6 +1,7 @@
 package com.cia.duelmasters.entity;
 
 import com.cia.duelmasters.enums.Civilization;
+import com.cia.duelmasters.enums.Race;
 import com.cia.duelmasters.enums.SpecialAbility;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class Card {
     @Column
     @Enumerated(EnumType.STRING)
     private Civilization civilization;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Race race;
 
     @Column
     private Integer manaCost;

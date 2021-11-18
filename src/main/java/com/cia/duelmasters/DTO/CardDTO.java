@@ -2,6 +2,7 @@ package com.cia.duelmasters.DTO;
 
 import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.enums.Civilization;
+import com.cia.duelmasters.enums.Race;
 import com.cia.duelmasters.enums.SpecialAbility;
 import lombok.*;
 
@@ -18,4 +19,5 @@ public class CardDTO {
     private String abilityText;
     private Player player;
     private SpecialAbility specialAbility;
+    private Race race;
 }

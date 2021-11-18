@@ -1,0 +1,38 @@
+package com.cia.duelmasters.enums;
+
+public enum Race {
+    ANGEL_COMMAND,
+    LIQUID_PEOPLE,
+    LEVIATHAN,
+    DEMON_COMMAND,
+    ARMORED_WYVERN,
+    ARMORED_DRAGON,
+    HORNED_BEAST,
+    GIANT_INSECT,
+    LIGHT_BRINGER,
+    GUARDIAN,
+    STARLIGHT_TREE,
+    INITIATE,
+    BERSERKER,
+    CYBER_VIRUS,
+    FISH,
+    GEL_FISH,
+    CYBER_LORD,
+    GHOST,
+    BRAIN_JACKER,
+    LIVING_DEAD,
+    CHIMERA,
+    PARASITE_WORM,
+    DARK_LORD,
+    ARMORLOID,
+    MACHINE_EATER,
+    HUMAN,
+    DRAGONOID,
+    ROCK_BEAST,
+    BEAST_FOLK,
+    TREE_FOLK,
+    COLONY_BEETLE,
+    BALLOON_MUSHROOM,
+
+
+}
