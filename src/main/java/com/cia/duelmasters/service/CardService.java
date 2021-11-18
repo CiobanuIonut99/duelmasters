@@ -26,7 +26,6 @@ public class CardService {
                 .cardName(card.getCardName())
                 .cardType(card.getCardType())
                 .civilization(card.getCivilization())
-                .race(card.getRace())
                 .manaCost(card.getManaCost())
                 .manaNumber(card.getManaNumber())
                 .power(card.getPower())

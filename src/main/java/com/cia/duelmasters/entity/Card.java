@@ -26,9 +26,6 @@ public class Card {
     private String civilization;
 
     @Column
-    private String race;
-
-    @Column
     private Integer manaCost;
 
     @Column

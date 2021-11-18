@@ -13,7 +13,6 @@ public class CardDTO {
     private String cardName;
     private String cardType;
     private String civilization;
-    private String race;
     private Integer manaCost;
     private Integer manaNumber;
     private Integer power;
