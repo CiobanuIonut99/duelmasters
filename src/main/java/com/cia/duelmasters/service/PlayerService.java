@@ -94,7 +94,6 @@ public class PlayerService {
         Player player = getPlayerByUsername(playerDTO.getUsername());
         player.setDecks(decks);
 
-        cardsList.forEach(System.out::println);
         return playerRepository.save(player);
     }
 

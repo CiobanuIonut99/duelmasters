@@ -28,11 +28,12 @@ public class Player {
     @Column
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "player")
+    @OneToMany(mappedBy = "player",
+            cascade = CascadeType.MERGE)
     private List<Deck> decks;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BATTLEZONE_ID")
+    @ManyToOne
+    @JoinColumn(name = "battlezone_id")
     private BattleZone battleZone;
 
 }

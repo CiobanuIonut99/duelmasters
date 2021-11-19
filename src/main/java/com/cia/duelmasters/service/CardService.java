@@ -63,4 +63,9 @@ public class CardService {
                .collect(toList());
     }
 
+    public void saveAll(List<Card> cards)
+    {
+        cardRepository.saveAll(cards);
+    }
+
 }
