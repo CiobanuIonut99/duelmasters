@@ -71,13 +71,13 @@ public class PlayerService {
         return playerRepository.getPlayerByUsername(username);
     }
 
-    public Player randomDeckForPlayer() {
+    public Player randomDeckForPlayer(PlayerDTO playerDTO) {
         List<CardDTO> deckDTO = generateRandomDeck();
         List<Card> deckEntity = deckDTO.stream()
                 .map(cardDto -> cardService.mapToEntity(cardDto))
                 .collect(toList());
 
-        Player player = getPlayerByUsername("alex12312312");
+        Player player = getPlayerByUsername(playerDTO.getUsername());
         player.setDeck(deckEntity);
         deckEntity.forEach(System.out::println);
         return playerRepository.save(player);
