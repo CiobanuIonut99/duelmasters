@@ -6,11 +6,11 @@ import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class PlayerDTO {
     private Long id;
     private String username;

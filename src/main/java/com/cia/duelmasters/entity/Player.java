@@ -1,5 +1,7 @@
 package com.cia.duelmasters.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,8 +12,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@Data
+@Getter
+@Setter
 public class Player {
 
     @Id
@@ -29,6 +31,7 @@ public class Player {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player",cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     private List<Card> deck;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -3,6 +3,7 @@ package com.cia.duelmasters.entity;
 import com.cia.duelmasters.enums.Civilization;
 import com.cia.duelmasters.enums.Race;
 import com.cia.duelmasters.enums.SpecialAbility;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "card", schema = "duel_masters")
-@Data
+@Getter
+@Setter
 public class Card {
 
     @Id
@@ -52,5 +54,6 @@ public class Card {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PLAYER_ID")
+    @JsonBackReference
     private Player player;
 }

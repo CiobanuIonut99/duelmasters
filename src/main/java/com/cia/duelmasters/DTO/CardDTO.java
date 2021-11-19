@@ -7,7 +7,10 @@ import com.cia.duelmasters.enums.SpecialAbility;
 import lombok.*;
 
 @Builder
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CardDTO {
     private Long id;
     private String cardName;
