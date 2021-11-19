@@ -51,9 +51,4 @@ public class Card {
     @Column
     @Enumerated(EnumType.STRING)
     private SpecialAbility specialAbility;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLAYER_ID")
-    @JsonBackReference
-    private Player player;
 }

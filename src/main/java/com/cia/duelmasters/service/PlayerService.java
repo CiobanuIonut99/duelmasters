@@ -78,7 +78,6 @@ public class PlayerService {
                 .collect(toList());
 
         Player player = getPlayerByUsername(playerDTO.getUsername());
-        player.setDeck(deckEntity);
         deckEntity.forEach(System.out::println);
         return playerRepository.save(player);
     }

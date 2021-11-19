@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS duel_masters.card(
     MANA_NUMBER int,
     POWER int,
     ABILITY_TEXT character varying (255),
-    PLAYER_ID integer,
     SPECIAL_ABILITY character varying (255)
 
     );

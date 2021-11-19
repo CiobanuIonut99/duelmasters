@@ -6,33 +6,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "player", schema = "duel_masters")
+@Table(name = "deck", schema = "duel_masters")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Player {
-
+public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id;
 
     @Column
-    private String username;
-
-    @Column
-    private String email;
-
-    @Column
-    private String password;
+    private String deckName;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Deck> deckId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BATTLEZONE_ID")
-    private BattleZone battleZone;
-
+    private List<Card> cardId;
 }
