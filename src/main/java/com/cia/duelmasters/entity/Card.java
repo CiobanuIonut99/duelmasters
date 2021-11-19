@@ -3,7 +3,6 @@ package com.cia.duelmasters.entity;
 import com.cia.duelmasters.enums.Civilization;
 import com.cia.duelmasters.enums.Race;
 import com.cia.duelmasters.enums.SpecialAbility;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private Long id;
 
     @Column
     private String cardName;
@@ -51,4 +50,8 @@ public class Card {
     @Column
     @Enumerated(EnumType.STRING)
     private SpecialAbility specialAbility;
+
+    @ManyToOne
+    @JoinColumn(name = "deck_id")
+    private Deck deck;
 }

@@ -14,6 +14,7 @@ import java.util.List;
 public class PlayerDTO {
     private Long id;
     private String username;
+    private String deckName;
     private String email;
     private String password;
     private List<Card> cardIdDeck;

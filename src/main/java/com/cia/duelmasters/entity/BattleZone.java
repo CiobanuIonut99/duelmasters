@@ -16,7 +16,7 @@ public class BattleZone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="battleZone")
     private List<Player> player;
