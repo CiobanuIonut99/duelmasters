@@ -112,7 +112,7 @@ VALUES
 ('Natural Snare','SPELL','NATURE',null ,6,1,0,'SHIELD_TRIGGER' ,'Choose one of your opponent.s creatures in the battle zone and put it into his mana zone' ),
 ('Pangaea.s Song','SPELL','NATURE',null ,1,1,0,null ,'Put 1 of your creatures from the battle zone into your mana zone.' ),
 ('Poisonous Dahlia','CREATURE','NATURE','TREE_FOLK' ,4,1,5000,null ,'This creature can.t attack players' ),
-('Poisonous Mushroom','CREATURE','NATURE','BALOON_MUSHROOM' ,2,1,1000,null ,'When you put this creature into the battle zone, you may put 1 card from your hand into your mana zone' ),
+('Poisonous Mushroom','CREATURE','NATURE','BALLOON_MUSHROOM' ,2,1,1000,null ,'When you put this creature into the battle zone, you may put 1 card from your hand into your mana zone' ),
 ('Red-Eye Scorpion','CREATURE','NATURE','GIANT_INSECT' ,5,1,4000,null ,'When this creature would be destroyed, put it into your mana zone instead.' ),
 ('Stampeding Longhorn','CREATURE','NATURE','HORNED_BEAST' ,5,1,4000,null ,'This creature can.t be blocked by any creature that has power 3000 or less.' ),
 ('Steel Smasher','CREATURE','NATURE','BEAST_FOLK' ,2,1,3000,null ,'This creature can.t attack players.' ),
