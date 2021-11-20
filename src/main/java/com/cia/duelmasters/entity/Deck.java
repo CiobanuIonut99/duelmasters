@@ -3,8 +3,6 @@ package com.cia.duelmasters.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
 @Entity
@@ -14,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +21,13 @@ public class Deck {
     @Column
     private String deckName;
 
-    @OneToMany(mappedBy = "deck",
-            cascade = CascadeType.MERGE)
+    @ManyToMany
+    @JoinTable(
+            name = "deck_card",
+            schema = "duel_masters",
+            joinColumns = @JoinColumn(name = "deck_id"),
+            inverseJoinColumns = @JoinColumn(name = "card_id")
+    )
     private List<Card> cards;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
 }

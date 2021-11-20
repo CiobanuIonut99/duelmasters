@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS duel_masters.card(
     RACE char varying (255),
     MANA_COST integer,
     MANA_NUMBER integer,
+    DECK_CARD integer,
     POWER integer,
     DECK_ID integer,
     ABILITY_TEXT character varying (255),

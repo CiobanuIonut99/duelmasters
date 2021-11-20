@@ -6,6 +6,7 @@ import com.cia.duelmasters.enums.SpecialAbility;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -51,7 +52,6 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private SpecialAbility specialAbility;
 
-    @ManyToOne
-    @JoinColumn(name = "deck_id")
-    private Deck deck;
+    @ManyToMany(mappedBy = "cards")
+    private List<Deck> decks;
 }

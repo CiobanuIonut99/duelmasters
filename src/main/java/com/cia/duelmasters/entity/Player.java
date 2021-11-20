@@ -3,7 +3,6 @@ package com.cia.duelmasters.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "player", schema = "duel_masters")
@@ -28,9 +27,9 @@ public class Player {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "player",
-            cascade = CascadeType.MERGE)
-    private List<Deck> decks;
+    @OneToOne
+    @JoinColumn(name = "deck_id")
+    private Deck deck;
 
     @ManyToOne
     @JoinColumn(name = "battlezone_id")
