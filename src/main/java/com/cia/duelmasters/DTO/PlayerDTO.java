@@ -17,10 +17,10 @@ public class PlayerDTO {
     private String deckName;
     private String email;
     private String password;
-    private DeckDTO cardIdDeck;
-    private List<Card> cardIdShieldZone;
-    private List<Card> cardIdCardsInHand;
-    private List<Card> cardIdManaZone;
-    private List<Card> cardIdGraveYard;
+    private DeckDTO deckDTO;
+    private List<Card> shieldZone;
+    private List<Card> hand;
+    private List<Card> manaZone;
+    private List<Card> graveYard;
     private BattleZone battleZone;
 }

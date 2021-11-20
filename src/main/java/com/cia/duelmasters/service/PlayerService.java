@@ -22,14 +22,17 @@ public class PlayerService {
     private PlayerRepository playerRepository;
     private DeckRepository deckRepository;
     private CardService cardService;
+    private DeckService deckService;
 
     @Autowired
     public PlayerService(PlayerRepository playerRepository,
                          DeckRepository deckRepository,
+                         DeckService deckService,
                          CardService cardService) {
         this.playerRepository = playerRepository;
         this.deckRepository = deckRepository;
         this.cardService = cardService;
+        this.deckService = deckService;
     }
 
     public DeckDTO generateRandomDeck() {
@@ -112,14 +115,30 @@ public class PlayerService {
         return cards;
     }
 
-    public List<CardDTO> generateShields(PlayerDTO playerDTO) {
+    private DeckDTO removeEach5Cards(DeckDTO deck) {
+        for (int i = 0; i < 4; i++) {
+            deck.getCards().remove(i);
+        }
+        return deck;
+    }
+
+    public PlayerDTO generateShields(PlayerDTO playerDTO) {
         Player player = playerRepository.getPlayerByUsername(playerDTO.getUsername());
 
+        playerDTO.setShieldZone(getFirst5Cards(player));
+
+        // AICI ESTE DEREZOLVAT NLLPOINTEREXCEPTION
+        playerDTO.setDeckDTO(removeEach5Cards(playerDTO.getDeckDTO()));
+        playerDTO.setHand(getFirst5Cards(player));
+
+        return playerDTO;
+    }
+
+    private List<Card> getFirst5Cards(Player player) {
         return reverseDeck(player.getDeck())
                 .stream()
                 .limit(5)
                 .peek(System.out::println)
-                .map(card -> cardService.mapEntityToDTO(card))
                 .collect(toList());
     }
 }

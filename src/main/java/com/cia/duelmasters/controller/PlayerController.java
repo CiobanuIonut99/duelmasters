@@ -1,6 +1,5 @@
 package com.cia.duelmasters.controller;
 
-import com.cia.duelmasters.DTO.CardDTO;
 import com.cia.duelmasters.DTO.DeckDTO;
 import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.entity.Player;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/players")
@@ -39,7 +36,7 @@ public class PlayerController {
     }
 
     @GetMapping("shields")
-    public List<CardDTO> generateShields(@RequestBody PlayerDTO playerDTO) {
+    public PlayerDTO generateShields(@RequestBody PlayerDTO playerDTO) {
         return playerService.generateShields(playerDTO);
     }
 
