@@ -17,7 +17,7 @@ public class PlayerDTO {
     private String deckName;
     private String email;
     private String password;
-    private List<Card> cardIdDeck;
+    private DeckDTO cardIdDeck;
     private List<Card> cardIdShieldZone;
     private List<Card> cardIdCardsInHand;
     private List<Card> cardIdManaZone;

@@ -111,4 +111,20 @@ public class PlayerService {
                 .map(cardDto -> cardService.mapToEntity(cardDto))
                 .collect(toList());
     }
+
+    public List<CardDTO> generateShields(PlayerDTO playerDTO) {
+        Player player = playerRepository.getPlayerByUsername(playerDTO.getUsername());
+
+        Collections.reverse(player
+                .getDeck()
+                .getCards());
+
+        return player
+                .getDeck()
+                .getCards()
+                .stream()
+                .limit(5)
+                .map(card -> cardService.mapEntityToDTO(card))
+                .collect(toList());
+    }
 }
