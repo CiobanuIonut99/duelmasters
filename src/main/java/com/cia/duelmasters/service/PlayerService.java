@@ -77,30 +77,32 @@ public class PlayerService {
     }
 
     public Player randomDeckForPlayer(PlayerDTO playerDTO) {
+        Deck deck = saveNewDeckAndGetIt(playerDTO);
+
+        long deckId = deck.getId();
+        System.out.println(deckId);
+
+        Player player = getPlayerByUsername(playerDTO.getUsername());
+        player.setDeck(deck);
+
+        return playerRepository.save(player);
+    }
+
+    private Deck saveNewDeckAndGetIt(PlayerDTO playerDTO) {
         List<CardDTO> cardDTOGeneratedList = generateRandomDeck();
-        List<Card> cardsList = mapCardsDtoToCards(cardDTOGeneratedList);
+        List<Card> cardsList = mapCardsDtoToCardsEntity(cardDTOGeneratedList);
 
         Deck deck = new Deck();
         deck.setDeckName(playerDTO.getDeckName());
         deck.setCards(cardsList);
         deckRepository.save(deck);
 
-        long deckId = deck.getId();
-        System.out.println(deckId);
-
-        List<Deck> decks = new ArrayList<>();
-        decks.add(deck);
-
-        Player player = getPlayerByUsername(playerDTO.getUsername());
-        player.setDecks(decks);
-
-        return playerRepository.save(player);
+        return deck;
     }
 
-    private List<Card> mapCardsDtoToCards(List<CardDTO> cardDTOGeneratedList) {
-        List<Card> cardsList = cardDTOGeneratedList.stream()
+    private List<Card> mapCardsDtoToCardsEntity(List<CardDTO> cardDTOGeneratedList) {
+        return cardDTOGeneratedList.stream()
                 .map(cardDto -> cardService.mapToEntity(cardDto))
                 .collect(toList());
-        return cardsList;
     }
 }
