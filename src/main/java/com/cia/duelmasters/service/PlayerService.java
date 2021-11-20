@@ -79,29 +79,20 @@ public class PlayerService {
     }
 
     public Player setDeckForPlayer(PlayerDTO playerDTO) {
-        Deck deck = saveNewDeckAndGetIt(playerDTO);
-
-        long deckId = deck.getId();
-        System.out.println(deckId);
-
         Player player = getPlayerByUsername(playerDTO.getUsername());
+        Deck deck = saveNewDeckAndGetIt(playerDTO);
         deck.setDeckName(playerDTO.getDeckName());
         player.setDeck(deck);
-
         return playerRepository.save(player);
     }
 
     private Deck saveNewDeckAndGetIt(PlayerDTO playerDTO) {
-        DeckDTO cardDTOGeneratedList = generateRandomDeck();
-        List<Card> cardsList = mapCardsDtoToCardsEntity(cardDTOGeneratedList);
+        List<Card> cardsList = mapCardsDtoToCardsEntity(generateRandomDeck());
 
-        Deck deck = Deck
-                .builder()
-                .deckName(playerDTO.getDeckName())
-                .cards(cardsList).build();
-        deckRepository.save(deck);
-
-        return deck;
+        return deckRepository
+                .save(Deck.builder()
+                        .deckName(playerDTO.getDeckName())
+                        .cards(cardsList).build());
     }
 
     private List<Card> mapCardsDtoToCardsEntity(DeckDTO deckDto) {
@@ -112,18 +103,22 @@ public class PlayerService {
                 .collect(toList());
     }
 
+    private List<Card> reverseDeck(Deck deck) {
+        List<Card> cardsFromDeck = deck.getCards();
+        List<Card> cards = new ArrayList<>();
+        for (int i = cardsFromDeck.size() - 1; i >= 0; i--) {
+            cards.add(cardsFromDeck.get(i));
+        }
+        return cards;
+    }
+
     public List<CardDTO> generateShields(PlayerDTO playerDTO) {
         Player player = playerRepository.getPlayerByUsername(playerDTO.getUsername());
 
-        Collections.reverse(player
-                .getDeck()
-                .getCards());
-
-        return player
-                .getDeck()
-                .getCards()
+        return reverseDeck(player.getDeck())
                 .stream()
                 .limit(5)
+                .peek(System.out::println)
                 .map(card -> cardService.mapEntityToDTO(card))
                 .collect(toList());
     }

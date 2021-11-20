@@ -15,6 +15,7 @@ import java.util.List;
 @Table(name = "card", schema = "duel_masters")
 @Getter
 @Setter
+@ToString
 public class Card {
 
     @Id
