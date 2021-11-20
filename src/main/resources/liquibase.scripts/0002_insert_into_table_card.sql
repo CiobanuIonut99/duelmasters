@@ -120,7 +120,7 @@ VALUES
 ('Thorny Mandra','CREATURE','NATURE','TREE_FOLK' ,5,1,4000,null ,'When you put this creature into the battle zone, you may put 1 creature from your graveyard into your mana zone.' ),
 ('Tower Shell','CREATURE','NATURE','COLONY_BEETLE' ,6,1,5000,null ,'This creature can.t be blocked by any creature that has power 4000 or less' ),
 ('Tri-horn Shepherd','CREATURE','NATURE','HORNED_BEAST' ,5,1,5000,null ,null),
-('Ultimate Force','SPELL','NATURE',null ,5,1,0,null ,'Put the top 2 cards of your deck into your mana zone.'),
+('Ultimate Force','SPELL','NATURE',null ,5,1,0,null ,'Put the top 2 cards of your deck into your mana zone.');
 
 
 
