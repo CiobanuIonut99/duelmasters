@@ -1,6 +1,6 @@
 package com.cia.duelmasters.controller;
 
-import com.cia.duelmasters.DTO.CardDTO;
+import com.cia.duelmasters.DTO.DeckDTO;
 import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.service.PlayerService;
@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/players")
@@ -23,7 +21,7 @@ public class PlayerController {
     }
 
     @GetMapping("random-deck")
-    public List<CardDTO> generateRandomDeck() {
+    public DeckDTO generateRandomDeck() {
         return playerService.generateRandomDeck();
     }
 
@@ -33,8 +31,8 @@ public class PlayerController {
     }
 
     @PutMapping
-    public Player randomDeckForPlayer(@RequestBody PlayerDTO playerDTO) {
-        return playerService.randomDeckForPlayer(playerDTO);
+    public Player setDeckForPlayer(@RequestBody PlayerDTO playerDTO) {
+        return playerService.setDeckForPlayer(playerDTO);
     }
 
 }

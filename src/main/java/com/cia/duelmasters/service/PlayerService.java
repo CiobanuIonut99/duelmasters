@@ -1,6 +1,7 @@
 package com.cia.duelmasters.service;
 
 import com.cia.duelmasters.DTO.CardDTO;
+import com.cia.duelmasters.DTO.DeckDTO;
 import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Deck;
@@ -31,14 +32,14 @@ public class PlayerService {
         this.cardService = cardService;
     }
 
-    public List<CardDTO> generateRandomDeck() {
+    public DeckDTO generateRandomDeck() {
         List<CardDTO> allCards = cardService.getCardDTOList();
         List<CardDTO> deck = new ArrayList<>();
         Map<CardDTO, Integer> longIntegerMap = new HashMap<>();
         return getCardDTOS(allCards, deck, longIntegerMap);
     }
 
-    private List<CardDTO> getCardDTOS(List<CardDTO> allCards, List<CardDTO> deck, Map<CardDTO, Integer> longIntegerMap) {
+    private DeckDTO getCardDTOS(List<CardDTO> allCards, List<CardDTO> deck, Map<CardDTO, Integer> longIntegerMap) {
         int count;
         Random random = new Random();
         for (int i = 0; i < 40; i++) {
@@ -55,7 +56,8 @@ public class PlayerService {
                 longIntegerMap.put(allCards.get(randomNr), 1);
             }
         }
-        return deck;
+
+        return DeckDTO.builder().cards(deck).build();
     }
 
     public ResponseEntity<HttpStatus> saveNewPlayer(PlayerDTO playerDTO) {
@@ -76,32 +78,36 @@ public class PlayerService {
         return playerRepository.getPlayerByUsername(username);
     }
 
-    public Player randomDeckForPlayer(PlayerDTO playerDTO) {
+    public Player setDeckForPlayer(PlayerDTO playerDTO) {
         Deck deck = saveNewDeckAndGetIt(playerDTO);
 
         long deckId = deck.getId();
         System.out.println(deckId);
 
         Player player = getPlayerByUsername(playerDTO.getUsername());
+        deck.setDeckName(playerDTO.getDeckName());
         player.setDeck(deck);
 
         return playerRepository.save(player);
     }
 
     private Deck saveNewDeckAndGetIt(PlayerDTO playerDTO) {
-        List<CardDTO> cardDTOGeneratedList = generateRandomDeck();
+        DeckDTO cardDTOGeneratedList = generateRandomDeck();
         List<Card> cardsList = mapCardsDtoToCardsEntity(cardDTOGeneratedList);
 
-        Deck deck = new Deck();
-        deck.setDeckName(playerDTO.getDeckName());
-        deck.setCards(cardsList);
+        Deck deck = Deck
+                .builder()
+                .deckName(playerDTO.getDeckName())
+                .cards(cardsList).build();
         deckRepository.save(deck);
 
         return deck;
     }
 
-    private List<Card> mapCardsDtoToCardsEntity(List<CardDTO> cardDTOGeneratedList) {
-        return cardDTOGeneratedList.stream()
+    private List<Card> mapCardsDtoToCardsEntity(DeckDTO deckDto) {
+        return deckDto
+                .getCards()
+                .stream()
                 .map(cardDto -> cardService.mapToEntity(cardDto))
                 .collect(toList());
     }
