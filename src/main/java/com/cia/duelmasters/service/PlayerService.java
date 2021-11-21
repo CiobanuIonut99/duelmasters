@@ -105,25 +105,27 @@ public class PlayerService {
     }
 
     private Deck removeEach5Cards(Deck deck) {
+        List<Card> cards = deck.getCards();
         for (int i = 0; i < CARDS_TO_REMOVE; i++) {
-            deck.getCards().remove(i);
+            cards.remove(i);
         }
+        deck.setCards(cards);
         return deck;
     }
 
     public PlayerDTO generateShieldsAndHand(PlayerDTO playerDTO) {
         Player player = playerRepository.getPlayerByUsername(playerDTO.getUsername());
-
 //        Collections.shuffle(player.getDeck().getCards());
-        player.setDeck(reverseDeck(player.getDeck()));
+        var reversedDeck = reverseDeck(player.getDeck());
+        player.setDeck(reversedDeck);
 
-        Deck first5Cards = removeEach5Cards(player.getDeck());
-
+        Deck deckWithout5Cards = removeEach5Cards(player.getDeck());
         playerDTO.setId(player.getId());
         playerDTO.setShieldZone(getFirst5Cards(player));
-        playerDTO.setDeck(removeEach5Cards(player.getDeck()));
+        playerDTO.setDeck(deckWithout5Cards);
         playerDTO.setHand(getFirst5Cards(player));
-        playerDTO.setDeck(removeEach5Cards(player.getDeck()));
+        deckWithout5Cards = removeEach5Cards(playerDTO.getDeck());
+        playerDTO.setDeck(deckWithout5Cards);
 
         return playerDTO;
     }
