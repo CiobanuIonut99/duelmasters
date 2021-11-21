@@ -37,7 +37,7 @@ public class PlayerController {
 
     @GetMapping("shields")
     public PlayerDTO generateShields(@RequestBody PlayerDTO playerDTO) {
-        return playerService.generateShieldsAndHand(playerDTO);
+         return playerService.generateShieldsAndHand(playerDTO);
     }
 
 }

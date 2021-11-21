@@ -106,7 +106,7 @@ public class PlayerService {
 
     private Deck removeEach5Cards(Deck deck) {
         List<Card> cards = deck.getCards();
-        for (int i = 0; i < CARDS_TO_REMOVE; i++) {
+        for (int i = 0,j = 0; j < CARDS_TO_REMOVE; j++) {
             cards.remove(i);
         }
         deck.setCards(cards);
@@ -115,13 +115,12 @@ public class PlayerService {
 
     public PlayerDTO generateShieldsAndHand(PlayerDTO playerDTO) {
         Player player = playerRepository.getPlayerByUsername(playerDTO.getUsername());
-//        Collections.shuffle(player.getDeck().getCards());
+        Collections.shuffle(player.getDeck().getCards());
         var reversedDeck = reverseDeck(player.getDeck());
         player.setDeck(reversedDeck);
-
-        Deck deckWithout5Cards = removeEach5Cards(player.getDeck());
-        playerDTO.setId(player.getId());
         playerDTO.setShieldZone(getFirst5Cards(player));
+        Deck deckWithout5Cards = removeEach5Cards(reversedDeck);
+
         playerDTO.setDeck(deckWithout5Cards);
         playerDTO.setHand(getFirst5Cards(player));
         deckWithout5Cards = removeEach5Cards(playerDTO.getDeck());
