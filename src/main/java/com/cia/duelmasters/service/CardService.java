@@ -1,14 +1,11 @@
 package com.cia.duelmasters.service;
 
-import com.cia.duelmasters.DTO.CardDTO;
 import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class CardService {
@@ -19,53 +16,9 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
-    public CardDTO mapEntityToDTO(Card card) {
-        return CardDTO
-                .builder()
-                .id(card.getId())
-                .cardName(card.getCardName())
-                .cardType(card.getCardType())
-                .civilization(card.getCivilization())
-                .manaCost(card.getManaCost())
-                .manaNumber(card.getManaNumber())
-                .power(card.getPower())
-                .abilityText(card.getAbilityText())
-                .race(card.getRace())
-                .specialAbility(card.getSpecialAbility())
-                .build();
-    }
-
-    public Card mapToEntity(CardDTO cardDTO) {
-        return Card
-                .builder()
-                .id(cardDTO.getId())
-                .cardName(cardDTO.getCardName())
-                .cardType(cardDTO.getCardType())
-                .civilization(cardDTO.getCivilization())
-                .manaCost(cardDTO.getManaCost())
-                .manaNumber(cardDTO.getManaNumber())
-                .power(cardDTO.getPower())
-                .abilityText(cardDTO.getAbilityText())
-                .race(cardDTO.getRace())
-                .specialAbility(cardDTO.getSpecialAbility())
-                .build();
-    }
-
-    public CardDTO getCardDTOByID(Long id) {
-        return mapEntityToDTO(cardRepository.getById(id));
-    }
-
-    public List<CardDTO> getCardDTOList() {
-       return cardRepository
-               .findAll()
-               .stream()
-               .map(this::mapEntityToDTO)
-               .collect(toList());
-    }
-
-    public void saveAll(List<Card> cards)
-    {
-        cardRepository.saveAll(cards);
+    public List<Card> getCardList() {
+        return cardRepository
+                .findAll();
     }
 
 }

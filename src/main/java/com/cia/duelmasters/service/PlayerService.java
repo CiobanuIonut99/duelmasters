@@ -1,7 +1,5 @@
 package com.cia.duelmasters.service;
 
-import com.cia.duelmasters.DTO.CardDTO;
-import com.cia.duelmasters.DTO.DeckDTO;
 import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Deck;
@@ -19,33 +17,32 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 public class PlayerService {
+    public static final int CARDS_IN_DECK = 40;
+    public static final int CARDS_TO_REMOVE = 5;
     private PlayerRepository playerRepository;
     private DeckRepository deckRepository;
     private CardService cardService;
-    private DeckService deckService;
 
     @Autowired
     public PlayerService(PlayerRepository playerRepository,
                          DeckRepository deckRepository,
-                         DeckService deckService,
                          CardService cardService) {
         this.playerRepository = playerRepository;
         this.deckRepository = deckRepository;
         this.cardService = cardService;
-        this.deckService = deckService;
     }
 
-    public DeckDTO generateRandomDeck() {
-        List<CardDTO> allCards = cardService.getCardDTOList();
-        List<CardDTO> deck = new ArrayList<>();
-        Map<CardDTO, Integer> longIntegerMap = new HashMap<>();
-        return getCardDTOS(allCards, deck, longIntegerMap);
+    public Deck generateRandomDeck() {
+        List<Card> allCards = cardService.getCardList();
+        List<Card> deck = new ArrayList<>();
+        Map<Card, Integer> longIntegerMap = new HashMap<>();
+        return getCards(allCards, deck, longIntegerMap);
     }
 
-    private DeckDTO getCardDTOS(List<CardDTO> allCards, List<CardDTO> deck, Map<CardDTO, Integer> longIntegerMap) {
+    private Deck getCards(List<Card> allCards, List<Card> deck, Map<Card, Integer> longIntegerMap) {
         int count;
-        Random random = new Random();
-        for (int i = 0; i < 40; i++) {
+        var random = new Random();
+        for (int i = 0; i < CARDS_IN_DECK; i++) {
             int randomNr = random.nextInt(allCards.size());
             if (longIntegerMap.get(allCards.get(randomNr)) != null) {
                 count = longIntegerMap.get(allCards.get(randomNr));
@@ -60,7 +57,7 @@ public class PlayerService {
             }
         }
 
-        return DeckDTO.builder().cards(deck).build();
+        return Deck.builder().cards(deck).build();
     }
 
     public ResponseEntity<HttpStatus> saveNewPlayer(PlayerDTO playerDTO) {
@@ -90,7 +87,7 @@ public class PlayerService {
     }
 
     private Deck saveNewDeckAndGetIt(PlayerDTO playerDTO) {
-        List<Card> cardsList = mapCardsDtoToCardsEntity(generateRandomDeck());
+        List<Card> cardsList = generateRandomDeck().getCards();
 
         return deckRepository
                 .save(Deck.builder()
@@ -98,44 +95,43 @@ public class PlayerService {
                         .cards(cardsList).build());
     }
 
-    private List<Card> mapCardsDtoToCardsEntity(DeckDTO deckDto) {
-        return deckDto
-                .getCards()
-                .stream()
-                .map(cardDto -> cardService.mapToEntity(cardDto))
-                .collect(toList());
-    }
-
-    private List<Card> reverseDeck(Deck deck) {
+    private Deck reverseDeck(Deck deck) {
         List<Card> cardsFromDeck = deck.getCards();
         List<Card> cards = new ArrayList<>();
         for (int i = cardsFromDeck.size() - 1; i >= 0; i--) {
             cards.add(cardsFromDeck.get(i));
         }
-        return cards;
+        return Deck.builder().cards(cards).build();
     }
 
-    private DeckDTO removeEach5Cards(DeckDTO deck) {
-        for (int i = 0; i < 4; i++) {
+    private Deck removeEach5Cards(Deck deck) {
+        for (int i = 0; i < CARDS_TO_REMOVE; i++) {
             deck.getCards().remove(i);
         }
         return deck;
     }
 
-    public PlayerDTO generateShields(PlayerDTO playerDTO) {
+    public PlayerDTO generateShieldsAndHand(PlayerDTO playerDTO) {
         Player player = playerRepository.getPlayerByUsername(playerDTO.getUsername());
 
-        playerDTO.setShieldZone(getFirst5Cards(player));
+//        Collections.shuffle(player.getDeck().getCards());
+        player.setDeck(reverseDeck(player.getDeck()));
 
-        // AICI ESTE DEREZOLVAT NLLPOINTEREXCEPTION
-        playerDTO.setDeckDTO(removeEach5Cards(playerDTO.getDeckDTO()));
+        Deck first5Cards = removeEach5Cards(player.getDeck());
+
+        playerDTO.setId(player.getId());
+        playerDTO.setShieldZone(getFirst5Cards(player));
+        playerDTO.setDeck(removeEach5Cards(player.getDeck()));
         playerDTO.setHand(getFirst5Cards(player));
+        playerDTO.setDeck(removeEach5Cards(player.getDeck()));
 
         return playerDTO;
     }
 
     private List<Card> getFirst5Cards(Player player) {
-        return reverseDeck(player.getDeck())
+        return player
+                .getDeck()
+                .getCards()
                 .stream()
                 .limit(5)
                 .peek(System.out::println)

@@ -1,5 +1,6 @@
 package com.cia.duelmasters.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Deck {
             joinColumns = @JoinColumn(name = "deck_id"),
             inverseJoinColumns = @JoinColumn(name = "card_id")
     )
+    @JsonIgnore
     private List<Card> cards;
 
 }

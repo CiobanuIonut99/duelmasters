@@ -1,7 +1,7 @@
 package com.cia.duelmasters.controller;
 
-import com.cia.duelmasters.DTO.DeckDTO;
 import com.cia.duelmasters.DTO.PlayerDTO;
+import com.cia.duelmasters.entity.Deck;
 import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PlayerController {
     }
 
     @GetMapping("random-deck")
-    public DeckDTO generateRandomDeck() {
+    public Deck generateRandomDeck() {
         return playerService.generateRandomDeck();
     }
 
@@ -37,7 +37,7 @@ public class PlayerController {
 
     @GetMapping("shields")
     public PlayerDTO generateShields(@RequestBody PlayerDTO playerDTO) {
-        return playerService.generateShields(playerDTO);
+        return playerService.generateShieldsAndHand(playerDTO);
     }
 
 }

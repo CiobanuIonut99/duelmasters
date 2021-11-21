@@ -2,6 +2,7 @@ package com.cia.duelmasters.DTO;
 
 import com.cia.duelmasters.entity.BattleZone;
 import com.cia.duelmasters.entity.Card;
+import com.cia.duelmasters.entity.Deck;
 import lombok.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class PlayerDTO {
     private String deckName;
     private String email;
     private String password;
-    private DeckDTO deckDTO;
+    private Deck deck;
     private List<Card> shieldZone;
     private List<Card> hand;
     private List<Card> manaZone;
