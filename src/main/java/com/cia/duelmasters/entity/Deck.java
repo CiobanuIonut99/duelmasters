@@ -29,7 +29,6 @@ public class Deck {
             joinColumns = @JoinColumn(name = "deck_id"),
             inverseJoinColumns = @JoinColumn(name = "card_id")
     )
-    @JsonIgnore
     private List<Card> cards;
 
 }
