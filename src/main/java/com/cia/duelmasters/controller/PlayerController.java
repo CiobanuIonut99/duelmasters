@@ -39,5 +39,9 @@ public class PlayerController {
     public PlayerDTO generateShields(@RequestBody PlayerDTO playerDTO) {
          return playerService.generateShieldsAndHand(playerDTO);
     }
+    @GetMapping("draw-card")
+    public PlayerDTO drawACard(@RequestBody PlayerDTO playerDTO) {
+          return playerService.drawACard(playerDTO);
+    }
 
 }

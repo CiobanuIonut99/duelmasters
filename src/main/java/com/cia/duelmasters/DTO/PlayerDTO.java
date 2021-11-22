@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlayerDTO {
+    //proprietes of player
     private Long id;
     private String username;
     private String deckName;
@@ -23,5 +24,7 @@ public class PlayerDTO {
     private List<Card> hand;
     private List<Card> manaZone;
     private List<Card> graveYard;
-    private BattleZone battleZone;
+
+    //checks for actions
+    private boolean myTurn;
 }

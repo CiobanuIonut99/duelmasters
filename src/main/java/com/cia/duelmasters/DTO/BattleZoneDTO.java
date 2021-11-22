@@ -7,11 +7,11 @@ import lombok.Setter;
 
 import java.util.List;
 
-
 @Getter
 @Setter
 @Builder
 public class BattleZoneDTO {
     private Long id;
     private List<Player> playerId;
+    private boolean firstRound = true;
 }

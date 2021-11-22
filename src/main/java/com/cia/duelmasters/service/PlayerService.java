@@ -6,6 +6,7 @@ import com.cia.duelmasters.entity.Deck;
 import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.repository.DeckRepository;
 import com.cia.duelmasters.repository.PlayerRepository;
+import liquibase.pro.packaged.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,22 @@ public class PlayerService {
         this.playerRepository = playerRepository;
         this.deckRepository = deckRepository;
         this.cardService = cardService;
+    }
+
+    protected void putACardInManaZone(PlayerDTO player){
+
+    }
+
+    public PlayerDTO drawACard(PlayerDTO playerDTO)
+    {
+        List<Card> deck = playerDTO.getDeck().getCards();
+        List<Card> hand = playerDTO.getHand();
+        System.out.println(deck.size());
+        hand.add(deck.get(0));
+        deck.remove(0);
+        System.out.println(deck.size());
+
+        return playerDTO;
     }
 
     public Deck generateRandomDeck() {

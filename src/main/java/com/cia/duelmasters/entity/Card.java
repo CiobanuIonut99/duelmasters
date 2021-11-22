@@ -57,4 +57,5 @@ public class Card {
     @ManyToMany(mappedBy = "cards")
     @JsonIgnore
     private List<Deck> decks;
+
 }
