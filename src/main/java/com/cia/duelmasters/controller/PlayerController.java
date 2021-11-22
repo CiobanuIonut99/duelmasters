@@ -35,13 +35,19 @@ public class PlayerController {
         return playerService.setDeckForPlayer(playerDTO);
     }
 
-    @GetMapping("shields")
-    public PlayerDTO generateShields(@RequestBody PlayerDTO playerDTO) {
+    @GetMapping("shields-hand")
+    public PlayerDTO generateShieldsAndHand(@RequestBody PlayerDTO playerDTO) {
          return playerService.generateShieldsAndHand(playerDTO);
     }
+
     @GetMapping("draw-card")
     public PlayerDTO drawACard(@RequestBody PlayerDTO playerDTO) {
           return playerService.drawACard(playerDTO);
+    }
+
+    @GetMapping("card-to-manazone/{cardId}")
+    public PlayerDTO addCardInManaZone(@RequestBody PlayerDTO playerDTO,@PathVariable(value = "cardId") Integer cardId) {
+          return playerService.addCardInManaZone(playerDTO,cardId);
     }
 
 }

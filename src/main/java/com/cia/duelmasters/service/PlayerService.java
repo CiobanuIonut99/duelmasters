@@ -6,7 +6,6 @@ import com.cia.duelmasters.entity.Deck;
 import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.repository.DeckRepository;
 import com.cia.duelmasters.repository.PlayerRepository;
-import liquibase.pro.packaged.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,18 +32,32 @@ public class PlayerService {
         this.cardService = cardService;
     }
 
-    protected void putACardInManaZone(PlayerDTO player){
+    protected void putACardInManaZone(PlayerDTO player) {
 
     }
 
-    public PlayerDTO drawACard(PlayerDTO playerDTO)
-    {
+    public PlayerDTO drawACard(PlayerDTO playerDTO) {
         List<Card> deck = playerDTO.getDeck().getCards();
         List<Card> hand = playerDTO.getHand();
         System.out.println(deck.size());
         hand.add(deck.get(0));
         deck.remove(0);
         System.out.println(deck.size());
+
+        return playerDTO;
+    }
+
+    public PlayerDTO addCardInManaZone(PlayerDTO playerDTO, int cardId) {
+
+        List<Card> hand = playerDTO.getHand();
+        List<Card> manaZone = playerDTO.getManaZone();
+
+        for (int i = 0; i < hand.size(); i++) {
+            if (hand.get(i).getId() == cardId) {
+                manaZone.add(hand.get(i));
+                hand.remove(hand.get(i));
+            }
+        }
 
         return playerDTO;
     }
@@ -123,7 +136,7 @@ public class PlayerService {
 
     private Deck removeEach5Cards(Deck deck) {
         List<Card> cards = deck.getCards();
-        for (int i = 0,j = 0; j < CARDS_TO_REMOVE; j++) {
+        for (int i = 0, j = 0; j < CARDS_TO_REMOVE; j++) {
             cards.remove(i);
         }
         deck.setCards(cards);
