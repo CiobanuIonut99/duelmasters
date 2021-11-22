@@ -5,6 +5,7 @@ import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Deck;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -22,9 +23,10 @@ public class PlayerDTO {
     private Deck deck;
     private List<Card> shieldZone;
     private List<Card> hand;
-    private List<Card> manaZone;
+    private List<Card> manaZone = new ArrayList<>();
     private List<Card> graveYard;
 
     //checks for actions
     private boolean myTurn;
+    private Long cardIdToRemove;
 }

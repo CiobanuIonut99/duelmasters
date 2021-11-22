@@ -45,9 +45,9 @@ public class PlayerController {
           return playerService.drawACard(playerDTO);
     }
 
-    @GetMapping("card-to-manazone/{cardId}")
-    public PlayerDTO addCardInManaZone(@RequestBody PlayerDTO playerDTO,@PathVariable(value = "cardId") Integer cardId) {
-          return playerService.addCardInManaZone(playerDTO,cardId);
+    @GetMapping("card-to-manazone")
+    public PlayerDTO addCardInManaZone(@RequestBody PlayerDTO playerDTO) {
+          return playerService.addCardInManaZone(playerDTO);
     }
 
 }

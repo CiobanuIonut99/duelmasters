@@ -47,17 +47,18 @@ public class PlayerService {
         return playerDTO;
     }
 
-    public PlayerDTO addCardInManaZone(PlayerDTO playerDTO, int cardId) {
+    public PlayerDTO addCardInManaZone(PlayerDTO playerDTO) {
 
         List<Card> hand = playerDTO.getHand();
-        List<Card> manaZone = playerDTO.getManaZone();
+        List<Card> manaZone = playerDTO.getManaZone() == null ? new ArrayList<>() : playerDTO.getManaZone();
 
         for (int i = 0; i < hand.size(); i++) {
-            if (hand.get(i).getId() == cardId) {
+            if (Objects.equals(hand.get(i).getId(), playerDTO.getCardIdToRemove())) {
                 manaZone.add(hand.get(i));
                 hand.remove(hand.get(i));
             }
         }
+        playerDTO.setManaZone(manaZone);
 
         return playerDTO;
     }
