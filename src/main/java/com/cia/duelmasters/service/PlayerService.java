@@ -32,10 +32,6 @@ public class PlayerService {
         this.cardService = cardService;
     }
 
-    protected void putACardInManaZone(PlayerDTO player) {
-
-    }
-
     public PlayerDTO drawACard(PlayerDTO playerDTO) {
         List<Card> deck = playerDTO.getDeck().getCards();
         List<Card> hand = playerDTO.getHand();
@@ -53,12 +49,28 @@ public class PlayerService {
         List<Card> manaZone = playerDTO.getManaZone() == null ? new ArrayList<>() : playerDTO.getManaZone();
 
         for (int i = 0; i < hand.size(); i++) {
-            if (Objects.equals(hand.get(i).getId(), playerDTO.getCardIdToRemove())) {
+            if (Objects.equals(hand.get(i).getId(), playerDTO.getCardIdToPutInManaZone())) {
                 manaZone.add(hand.get(i));
                 hand.remove(hand.get(i));
             }
         }
         playerDTO.setManaZone(manaZone);
+
+        return playerDTO;
+    }
+
+    public PlayerDTO addCardInAttackZone(PlayerDTO playerDTO) {
+
+        List<Card> hand = playerDTO.getHand();
+        List<Card> attackZone = playerDTO.getAttackZone()== null ? new ArrayList<>() : playerDTO.getAttackZone();
+
+        for (int i = 0; i < hand.size(); i++) {
+            if (Objects.equals(hand.get(i).getId(), playerDTO.getCardIdToPutInAttackZone())) {
+                attackZone.add(hand.get(i));
+                hand.remove(hand.get(i));
+            }
+        }
+        playerDTO.setAttackZone(attackZone);
 
         return playerDTO;
     }

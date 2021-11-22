@@ -50,4 +50,9 @@ public class PlayerController {
           return playerService.addCardInManaZone(playerDTO);
     }
 
+    @GetMapping("card-to-attackzone")
+    public PlayerDTO addCardInAttackZone(@RequestBody PlayerDTO playerDTO) {
+        return playerService.addCardInAttackZone(playerDTO);
+    }
+
 }

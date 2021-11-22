@@ -23,10 +23,12 @@ public class PlayerDTO {
     private Deck deck;
     private List<Card> shieldZone;
     private List<Card> hand;
-    private List<Card> manaZone = new ArrayList<>();
+    private List<Card> manaZone;
+    private List<Card> attackZone;
     private List<Card> graveYard;
 
     //checks for actions
     private boolean myTurn;
-    private Long cardIdToRemove;
+    private Long cardIdToPutInManaZone;
+    private Long cardIdToPutInAttackZone;
 }
