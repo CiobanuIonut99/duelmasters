@@ -62,7 +62,7 @@ public class PlayerService {
     public PlayerDTO addCardInAttackZone(PlayerDTO playerDTO) {
 
         List<Card> hand = playerDTO.getHand();
-        List<Card> attackZone = playerDTO.getAttackZone()== null ? new ArrayList<>() : playerDTO.getAttackZone();
+        List<Card> attackZone = playerDTO.getAttackZone() == null ? new ArrayList<>() : playerDTO.getAttackZone();
 
         for (int i = 0; i < hand.size(); i++) {
             if (Objects.equals(hand.get(i).getId(), playerDTO.getCardIdToPutInAttackZone())) {
@@ -82,10 +82,11 @@ public class PlayerService {
         return getCards(allCards, deck, longIntegerMap);
     }
 
-    public PlayerDTO getMyDeck(String username)
-    {
+    public PlayerDTO getMyDeck(String username) {
         var player = playerRepository.getPlayerByUsername(username);
-        return mapEntityToDTO(player);
+        var playerDTO = mapEntityToDTO(player);
+        playerDTO = generateShieldsAndHand(playerDTO);
+        return playerDTO;
     }
 
     private Deck getCards(List<Card> allCards, List<Card> deck, Map<Card, Integer> longIntegerMap) {
@@ -122,6 +123,7 @@ public class PlayerService {
                 .password(playerDTO.getPassword())
                 .build();
     }
+
     private PlayerDTO mapEntityToDTO(Player player) {
         return PlayerDTO
                 .builder()
