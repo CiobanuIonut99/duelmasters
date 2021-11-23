@@ -82,6 +82,12 @@ public class PlayerService {
         return getCards(allCards, deck, longIntegerMap);
     }
 
+    public PlayerDTO getMyDeck(String username)
+    {
+        var player = playerRepository.getPlayerByUsername(username);
+        return mapEntityToDTO(player);
+    }
+
     private Deck getCards(List<Card> allCards, List<Card> deck, Map<Card, Integer> longIntegerMap) {
         int count;
         var random = new Random();
@@ -114,6 +120,16 @@ public class PlayerService {
                 .username(playerDTO.getUsername())
                 .email(playerDTO.getEmail())
                 .password(playerDTO.getPassword())
+                .build();
+    }
+    private PlayerDTO mapEntityToDTO(Player player) {
+        return PlayerDTO
+                .builder()
+                .username(player.getUsername())
+                .email(player.getEmail())
+                .password(player.getPassword())
+                .id(player.getId())
+                .deck(player.getDeck())
                 .build();
     }
 

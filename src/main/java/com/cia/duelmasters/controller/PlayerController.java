@@ -25,6 +25,11 @@ public class PlayerController {
         return playerService.generateRandomDeck();
     }
 
+    @GetMapping("my-deck/{username}")
+    public PlayerDTO getMyDeck(@PathVariable(name = "username") String username) {
+        return playerService.getMyDeck(username);
+    }
+
     @PostMapping
     public ResponseEntity<HttpStatus> saveNewPlayer(@RequestBody PlayerDTO playerDTO) {
         return playerService.saveNewPlayer(playerDTO);
