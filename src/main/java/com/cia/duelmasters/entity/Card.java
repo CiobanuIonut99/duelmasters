@@ -51,6 +51,9 @@ public class Card {
     private String abilityText;
 
     @Column
+    private Boolean isTapped;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private SpecialAbility specialAbility;
 
