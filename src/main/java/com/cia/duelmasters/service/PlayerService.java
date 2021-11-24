@@ -46,8 +46,8 @@ public class PlayerService {
             cards.addAll(playerDTO.getDeck().getCards());
         if (playerDTO.getManaZone() != null)
             cards.addAll(playerDTO.getManaZone());
-        if (playerDTO.getAttackZone() != null)
-            cards.addAll(playerDTO.getAttackZone());
+        if (playerDTO.getHand() != null)
+            cards.addAll(playerDTO.getHand());
         changeTap(cards, playerDTO.getIdToChangeForTapping());
 
         return playerDTO;
@@ -59,6 +59,7 @@ public class PlayerService {
             card = cards.get(i);
             if (Objects.equals(id, card.getPositionInList())) {
                 card.setIsTapped(!card.getIsTapped());
+                cards.set(i,card);
             }
         }
         return cards;
