@@ -35,11 +35,8 @@ public class PlayerService {
     public PlayerDTO drawACard(PlayerDTO playerDTO) {
         List<Card> deck = playerDTO.getDeck().getCards();
         List<Card> hand = playerDTO.getHand();
-        System.out.println(deck.size());
         hand.add(deck.get(0));
         deck.remove(0);
-        System.out.println(deck.size());
-
         return playerDTO;
     }
 
@@ -92,18 +89,21 @@ public class PlayerService {
     private Deck getCards(List<Card> allCards, List<Card> deck, Map<Card, Integer> longIntegerMap) {
         int count;
         var random = new Random();
+        Card card;
         for (int i = 0; i < CARDS_IN_DECK; i++) {
             int randomNr = random.nextInt(allCards.size());
+            card = allCards.get(randomNr);
+            card.setPositionInList(random.nextInt(2147483647));
             if (longIntegerMap.get(allCards.get(randomNr)) != null) {
-                count = longIntegerMap.get(allCards.get(randomNr));
-                if ((longIntegerMap.get(allCards.get(randomNr)) < 4)) {
-                    deck.add(allCards.get(randomNr));
+                count = longIntegerMap.get(card);
+                if ((longIntegerMap.get(card) < 4)) {
+                    deck.add(card);
                     count++;
-                    longIntegerMap.put(allCards.get(randomNr), count);
+                    longIntegerMap.put(card, count);
                 }
             } else {
-                deck.add(allCards.get(randomNr));
-                longIntegerMap.put(allCards.get(randomNr), 1);
+                deck.add(card);
+                longIntegerMap.put(card, 1);
             }
         }
 
@@ -196,7 +196,6 @@ public class PlayerService {
                 .getCards()
                 .stream()
                 .limit(5)
-                .peek(System.out::println)
                 .collect(toList());
     }
 }

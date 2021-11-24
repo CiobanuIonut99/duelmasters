@@ -55,6 +55,9 @@ public class Card {
     private Boolean isTapped;
 
     @Column
+    private Integer positionInList;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private SpecialAbility specialAbility;
 

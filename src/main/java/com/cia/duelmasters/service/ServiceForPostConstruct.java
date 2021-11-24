@@ -40,7 +40,6 @@ public class ServiceForPostConstruct {
         var p = Paths.get("src/main/resources/cards.images/HanusaRadianceElemental.jpg");
         Long x = 1L;
         Card card = cardService.getById(x).get();
-        System.out.println(card);
         String cardName = card.getCardName().replaceAll("[^a-zA-Z]+", "");
         if(cardName.equals(FilenameUtils.removeExtension(p.getFileName().toString())))
         {
@@ -49,8 +48,6 @@ public class ServiceForPostConstruct {
             byte[] cardImage =inputStream.readAllBytes();
             card.setCardImage(cardImage);
             cardService.save(card);
-            System.out.println("aceeasi carte");
         }
-        System.out.println(cardName);
     }
 }

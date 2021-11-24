@@ -1,11 +1,9 @@
 package com.cia.duelmasters.DTO;
 
-import com.cia.duelmasters.entity.BattleZone;
 import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Deck;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -31,4 +29,5 @@ public class PlayerDTO {
     private boolean myTurn;
     private Long cardIdToPutInManaZone;
     private Long cardIdToPutInAttackZone;
+
 }
