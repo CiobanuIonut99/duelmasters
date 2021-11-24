@@ -40,6 +40,38 @@ public class PlayerService {
         return playerDTO;
     }
 
+    public PlayerDTO updateTappedCard(PlayerDTO playerDTO) {
+        List<Card> cards = new ArrayList<>();
+        String location = playerDTO.getLocation();
+        if (location.equals("deck")) {
+            Deck deck = new Deck();
+            cards.addAll(playerDTO.getDeck().getCards());
+            deck.setCards(changeTap(cards, playerDTO.getIdToChangeForTapping()));
+            playerDTO.setDeck(deck);
+        } else if (location.equals("attackZone")) {
+            cards.addAll(playerDTO.getAttackZone());
+            playerDTO.setAttackZone(changeTap(cards, playerDTO.getIdToChangeForTapping()));
+        } else if (location.equals("manaZone")) {
+            cards.addAll(playerDTO.getManaZone());
+            playerDTO.setManaZone(changeTap(cards, playerDTO.getIdToChangeForTapping()));
+        } else if (location.equals("hand")) {
+            cards.addAll(playerDTO.getHand());
+            playerDTO.setHand(changeTap(cards, playerDTO.getIdToChangeForTapping()));
+        }
+        return playerDTO;
+    }
+
+    private List<Card> changeTap(List<Card> cards, Integer id) {
+        Card card;
+        for (int i = 0; i < cards.size(); i++) {
+            card = cards.get(i);
+            if (Objects.equals(id, card.getPositionInList())) {
+                card.setIsTapped(!card.getIsTapped());
+            }
+        }
+        return cards;
+    }
+
     public PlayerDTO addCardInManaZone(PlayerDTO playerDTO) {
 
         List<Card> hand = playerDTO.getHand();

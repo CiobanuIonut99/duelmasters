@@ -29,5 +29,6 @@ public class PlayerDTO {
     private boolean myTurn;
     private Long cardIdToPutInManaZone;
     private Long cardIdToPutInAttackZone;
-
+    private String location;
+    private Integer idToChangeForTapping;
 }

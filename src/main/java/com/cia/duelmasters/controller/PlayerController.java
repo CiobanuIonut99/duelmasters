@@ -40,6 +40,11 @@ public class PlayerController {
         return playerService.setDeckForPlayer(playerDTO);
     }
 
+    @PutMapping("tap")
+    public PlayerDTO updateTappedCard(@RequestBody PlayerDTO playerDTO) {
+        return playerService.updateTappedCard(playerDTO);
+    }
+
     @GetMapping("shields-hand")
     public PlayerDTO generateShieldsAndHand(@RequestBody PlayerDTO playerDTO) {
          return playerService.generateShieldsAndHand(playerDTO);
