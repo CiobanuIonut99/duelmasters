@@ -5,8 +5,8 @@ import com.cia.duelmasters.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardService {
@@ -22,13 +22,16 @@ public class CardService {
                 .findAll();
     }
 
-    @PostConstruct
-    public void updateIsTappedForCards(){
-        List<Card> cards = cardRepository.findAll();
-        for (int i = 0; i < cards.size(); i++) {
-            cards.get(i).setIsTapped(false);
-        }
+    public void saveAll(List<Card> cards) {
         cardRepository.saveAll(cards);
+    }
+
+    public Optional<Card> getById(Long id) {
+        return cardRepository.findById(id);
+    }
+
+    public void save(Card card) {
+        cardRepository.save(card);
     }
 
 }

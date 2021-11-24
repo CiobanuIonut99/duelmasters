@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS duel_masters.card(
     DECK_ID integer,
     IS_TAPPED boolean,
     ABILITY_TEXT character varying (255),
-    SPECIAL_ABILITY character varying (255)
+    SPECIAL_ABILITY character varying (255),
+     CARD_IMAGE bytea
 
     );

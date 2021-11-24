@@ -5,6 +5,7 @@ import com.cia.duelmasters.enums.Race;
 import com.cia.duelmasters.enums.SpecialAbility;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -57,8 +58,13 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private SpecialAbility specialAbility;
 
-    @ManyToMany(mappedBy = "cards")
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "cards")
     @JsonIgnore
     private List<Deck> decks;
+
+    @Column
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] cardImage;
 
 }

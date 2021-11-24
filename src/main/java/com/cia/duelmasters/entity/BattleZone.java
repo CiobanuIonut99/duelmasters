@@ -18,7 +18,7 @@ public class BattleZone {
     @Column
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy ="battleZone")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy ="battleZone")
     private List<Player> player;
 
 }

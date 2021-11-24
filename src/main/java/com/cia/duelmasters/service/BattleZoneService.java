@@ -2,6 +2,7 @@ package com.cia.duelmasters.service;
 
 import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.repository.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class BattleZoneService {
     PlayerRepository playerRepository;
     PlayerService playerService;
 
+    @Autowired
     public BattleZoneService(PlayerRepository playerRepository, PlayerService playerService) {
         this.playerRepository = playerRepository;
         this.playerService = playerService;
