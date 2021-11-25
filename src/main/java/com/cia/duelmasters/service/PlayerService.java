@@ -95,11 +95,12 @@ public class PlayerService {
             Card card = hand.get(i);
             Civilization civilization = card.getCivilization();
             Integer manaCost = card.getManaCost();
+            List<Card> availableManaZone = getAvailableMana(manaZone);
+            boolean containsCivilization = containsCivilizationInAvailableMana(availableManaZone, civilization);
             if (firstCondition &&
-                    (getAvailableMana(manaZone) >= manaCost) &&
-                    (manaContainsAtLeastOneCardOfSpecifiedCivilization(manaZone, civilization))
-            ) {
-                tapManaCard(manaZone, manaCost);
+                    (availableManaZone.size() >= manaCost) &&
+                    containsCivilization) {
+                tapManaCard(availableManaZone, manaCost,civilization);
                 attackZone.add(card);
                 hand.remove(card);
             }
@@ -108,17 +109,22 @@ public class PlayerService {
         return playerDTO;
     }
 
-    private int getAvailableMana(List<Card> manaZone){
-        int availableMana = 0;
+    private List<Card> getAvailableMana(List<Card> manaZone){
+        List<Card> availableManaZone = new ArrayList<>();
         for (int i = 0; i < manaZone.size(); i++) {
             if(!manaZone.get(i).getIsTapped()){
-                availableMana ++;
+                availableManaZone.add(manaZone.get(i));
             }
         }
-        return availableMana;
+        return availableManaZone;
     }
 
-    private List<Card> tapManaCard(List<Card> manaZone,Integer manaCost){
+    private boolean containsCivilizationInAvailableMana(List<Card> availableManaZone,Civilization civilization)
+    {
+        return availableManaZone.stream().anyMatch(card -> card.getCivilization().equals(civilization));
+    }
+
+    private List<Card> tapManaCard(List<Card> manaZone,Integer manaCost, Civilization civilization){
         Card card = null;
         for (int i = 0; i < manaCost; i++) {
             card = manaZone.get(i);
@@ -127,10 +133,6 @@ public class PlayerService {
             }
         }
         return manaZone;
-    }
-
-    private boolean manaContainsAtLeastOneCardOfSpecifiedCivilization(List<Card> manaZone, Civilization civilization) {
-        return manaZone.stream().anyMatch(card -> card.getCivilization().equals(civilization));
     }
 
     public Deck generateRandomDeck() {
