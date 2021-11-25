@@ -41,6 +41,7 @@ public class PlayerService {
     }
 
     public PlayerDTO updateTappedCard(PlayerDTO playerDTO) {
+        //de schimbat getHand in getAttackZone cand avansez la partea de front end :)
         List<Card> cards = new ArrayList<>();
         if (playerDTO.getDeck() != null)
             cards.addAll(playerDTO.getDeck().getCards());
