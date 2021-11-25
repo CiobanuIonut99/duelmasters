@@ -19,9 +19,9 @@ import static java.util.stream.Collectors.toList;
 public class PlayerService {
     public static final int CARDS_IN_DECK = 40;
     public static final int CARDS_TO_REMOVE = 5;
-    private PlayerRepository playerRepository;
-    private DeckRepository deckRepository;
-    private CardService cardService;
+    private final PlayerRepository playerRepository;
+    private final DeckRepository deckRepository;
+    private final CardService cardService;
 
     @Autowired
     public PlayerService(PlayerRepository playerRepository,
@@ -60,7 +60,7 @@ public class PlayerService {
             card = cards.get(i);
             if (Objects.equals(id, card.getPositionInList())) {
                 card.setIsTapped(!card.getIsTapped());
-                cards.set(i,card);
+                cards.set(i, card);
             }
         }
         return cards;
@@ -72,7 +72,7 @@ public class PlayerService {
         List<Card> manaZone = playerDTO.getManaZone() == null ? new ArrayList<>() : playerDTO.getManaZone();
 
         for (int i = 0; i < hand.size(); i++) {
-            if (Objects.equals(hand.get(i).getId(), playerDTO.getCardIdToPutInManaZone())) {
+            if (Objects.equals(hand.get(i).getPositionInList().longValue(), playerDTO.getCardIdToPutInManaZone())) {
                 manaZone.add(hand.get(i));
                 hand.remove(hand.get(i));
             }
@@ -158,6 +158,7 @@ public class PlayerService {
                 .password(player.getPassword())
                 .id(player.getId())
                 .deck(player.getDeck())
+                .manaZone(new ArrayList<>())
                 .build();
     }
 

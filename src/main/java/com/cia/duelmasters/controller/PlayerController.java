@@ -55,12 +55,12 @@ public class PlayerController {
           return playerService.drawACard(playerDTO);
     }
 
-    @GetMapping("card-to-manazone")
+    @PutMapping("card-to-manazone")
     public PlayerDTO addCardInManaZone(@RequestBody PlayerDTO playerDTO) {
           return playerService.addCardInManaZone(playerDTO);
     }
 
-    @GetMapping("card-to-attackzone")
+    @PutMapping("card-to-attackzone")
     public PlayerDTO addCardInAttackZone(@RequestBody PlayerDTO playerDTO) {
         return playerService.addCardInAttackZone(playerDTO);
     }

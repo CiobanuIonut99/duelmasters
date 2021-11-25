@@ -4,6 +4,7 @@ import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Deck;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -19,11 +20,11 @@ public class PlayerDTO {
     private String email;
     private String password;
     private Deck deck;
-    private List<Card> shieldZone;
-    private List<Card> hand;
-    private List<Card> manaZone;
-    private List<Card> attackZone;
-    private List<Card> graveYard;
+    private List<Card> shieldZone = new ArrayList<>();
+    private List<Card> hand = new ArrayList<>();
+    private List<Card> manaZone = new ArrayList<>();
+    private List<Card> attackZone = new ArrayList<>();
+    private List<Card> graveYard = new ArrayList<>();
 
     //checks for actions
     private boolean myTurn;
