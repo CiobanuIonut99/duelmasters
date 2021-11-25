@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ServiceForPostConstruct {
@@ -37,17 +41,33 @@ public class ServiceForPostConstruct {
 
     @PostConstruct
     public void addInDataBaseForEachCard() throws IOException {
-        var p = Paths.get("src/main/resources/cards.images/HanusaRadianceElemental.jpg");
-        Long x = 1L;
-        Card card = cardService.getById(x).get();
-        String cardName = card.getCardName().replaceAll("[^a-zA-Z]+", "");
-        if(cardName.equals(FilenameUtils.removeExtension(p.getFileName().toString())))
-        {
-            File image = new File(p.toString());
-            FileInputStream inputStream = new FileInputStream(image);
-            byte[] cardImage =inputStream.readAllBytes();
-            card.setCardImage(cardImage);
-            cardService.save(card);
+        List<Card> cards =
+                cardService
+                        .getCardList()
+                        .stream()
+                        .sorted(Comparator.comparing(Card::getCardName))
+                        .collect(Collectors.toList());
+
+        List<String> pathsOfCards =
+                Files.list(Paths.get("src/main/resources/cards.images"))
+                        .filter(file -> !Files.isDirectory(file))
+                        .map(Path::getFileName)
+                        .map(Path::toString)
+                        .filter(name -> name.endsWith(".jpg"))
+                        .sorted()
+                        .collect(Collectors.toList());
+
+        for (int i = 0; i < pathsOfCards.size(); i++) {
+            Card card = cards.get(i);
+            String fileNameWithoutExtension = FilenameUtils.removeExtension(pathsOfCards.get(i));
+            String cardName = cards.get(i).getCardName();
+            if (fileNameWithoutExtension.equalsIgnoreCase(cardName.replaceAll("[^a-zA-Z]+", ""))) {
+                    File image = new File("src/main/resources/cards.images/".concat(pathsOfCards.get(i)));
+                    FileInputStream inputStream = new FileInputStream(image);
+                    byte[] cardImage =inputStream.readAllBytes();
+                    card.setCardImage(cardImage);
+                    cardService.save(card);
+            }
         }
     }
 }

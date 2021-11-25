@@ -25,6 +25,7 @@ public class PlayerDTO {
     private List<Card> manaZone = new ArrayList<>();
     private List<Card> attackZone = new ArrayList<>();
     private List<Card> graveYard = new ArrayList<>();
+    private byte[] cardImage;
 
     //checks for actions
     private boolean myTurn;

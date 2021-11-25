@@ -159,6 +159,7 @@ public class PlayerService {
                 .id(player.getId())
                 .deck(player.getDeck())
                 .manaZone(new ArrayList<>())
+                .attackZone(new ArrayList<>())
                 .build();
     }
 
