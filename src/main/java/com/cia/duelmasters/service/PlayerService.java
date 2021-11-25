@@ -7,6 +7,7 @@ import com.cia.duelmasters.entity.Player;
 import com.cia.duelmasters.enums.Civilization;
 import com.cia.duelmasters.repository.DeckRepository;
 import com.cia.duelmasters.repository.PlayerRepository;
+import liquibase.pro.packaged.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -94,19 +95,38 @@ public class PlayerService {
             Card card = hand.get(i);
             Civilization civilization = card.getCivilization();
             Integer manaCost = card.getManaCost();
-            long availableMana = manaZone.size();
             if (firstCondition &&
-                    (availableMana >= manaCost) &&
+                    (getAvailableMana(manaZone) >= manaCost) &&
                     (manaContainsAtLeastOneCardOfSpecifiedCivilization(manaZone, civilization))
             ) {
-
+                tapManaCard(manaZone, manaCost);
                 attackZone.add(card);
                 hand.remove(card);
             }
         }
         playerDTO.setAttackZone(attackZone);
-
         return playerDTO;
+    }
+
+    private int getAvailableMana(List<Card> manaZone){
+        int availableMana = 0;
+        for (int i = 0; i < manaZone.size(); i++) {
+            if(!manaZone.get(i).getIsTapped()){
+                availableMana ++;
+            }
+        }
+        return availableMana;
+    }
+
+    private List<Card> tapManaCard(List<Card> manaZone,Integer manaCost){
+        Card card = null;
+        for (int i = 0; i < manaCost; i++) {
+            card = manaZone.get(i);
+            if(!card.getIsTapped()){
+                card.setIsTapped(!card.getIsTapped());
+            }
+        }
+        return manaZone;
     }
 
     private boolean manaContainsAtLeastOneCardOfSpecifiedCivilization(List<Card> manaZone, Civilization civilization) {
