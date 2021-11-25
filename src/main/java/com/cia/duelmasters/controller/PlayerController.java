@@ -50,7 +50,7 @@ public class PlayerController {
          return playerService.generateShieldsAndHand(playerDTO);
     }
 
-    @GetMapping("draw-card")
+    @PutMapping("draw-card")
     public PlayerDTO drawACard(@RequestBody PlayerDTO playerDTO) {
           return playerService.drawACard(playerDTO);
     }

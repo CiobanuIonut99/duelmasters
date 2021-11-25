@@ -4,6 +4,7 @@ import com.cia.duelmasters.DTO.PlayerDTO;
 import com.cia.duelmasters.entity.Card;
 import com.cia.duelmasters.entity.Deck;
 import com.cia.duelmasters.entity.Player;
+import com.cia.duelmasters.enums.Civilization;
 import com.cia.duelmasters.repository.DeckRepository;
 import com.cia.duelmasters.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,17 +86,31 @@ public class PlayerService {
     public PlayerDTO addCardInAttackZone(PlayerDTO playerDTO) {
 
         List<Card> hand = playerDTO.getHand();
+        List<Card> manaZone = playerDTO.getManaZone();
         List<Card> attackZone = playerDTO.getAttackZone() == null ? new ArrayList<>() : playerDTO.getAttackZone();
 
         for (int i = 0; i < hand.size(); i++) {
-            if (Objects.equals(hand.get(i).getPositionInList().longValue(), playerDTO.getCardIdToPutInAttackZone())) {
-                attackZone.add(hand.get(i));
-                hand.remove(hand.get(i));
+            boolean firstCondition = Objects.equals(hand.get(i).getPositionInList().longValue(), playerDTO.getCardIdToPutInAttackZone());
+            Card card = hand.get(i);
+            Civilization civilization = card.getCivilization();
+            Integer manaCost = card.getManaCost();
+            long availableMana = manaZone.size();
+            if (firstCondition &&
+                    (availableMana >= manaCost) &&
+                    (manaContainsAtLeastOneCardOfSpecifiedCivilization(manaZone, civilization))
+            ) {
+
+                attackZone.add(card);
+                hand.remove(card);
             }
         }
         playerDTO.setAttackZone(attackZone);
 
         return playerDTO;
+    }
+
+    private boolean manaContainsAtLeastOneCardOfSpecifiedCivilization(List<Card> manaZone, Civilization civilization) {
+        return manaZone.stream().anyMatch(card -> card.getCivilization().equals(civilization));
     }
 
     public Deck generateRandomDeck() {
